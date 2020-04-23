@@ -354,6 +354,7 @@ export default class Tips extends PureComponent {
 
     return (
       <View
+        accessible={false}
         collapsable={false}
         renderToHardwareTextureAndroid
         ref={(view) => { this.view = view }}
@@ -361,19 +362,28 @@ export default class Tips extends PureComponent {
         <View onLayout={this.handleLayout}>{children}</View>
 
         <Modal
+          accessible={false}
           animationType="fade"
           visible={visible}
           transparent
           onRequestClose={this.handleRequestClose}
         >
           <TouchableOpacity
+            accessible={false}
+            accessibilityLabel="touchable_opacity_label"
             activeOpacity={1}
             focusedOpacity={1}
             style={{ flex: 1 }}
             onPress={this.handleRequestClose}
           >
-            <View style={[styles.modal, modalStyle]}>
+            <View
+              style={[styles.modal, modalStyle]}
+              accessible={false}
+              accessibilityLabel="view_modal_label"
+            >
               <ModalContent
+                accessible={false}
+                accessibilityLabel="modal_content_label"
                 style={[
                   this.getModalContentStyleByPosition(position),
                   { left, top },
@@ -390,13 +400,15 @@ export default class Tips extends PureComponent {
                     width,
                     height,
                     zIndex: enableChildrenInteraction ? 2 : 0
-                    }, childrenStyle
+                  }, childrenStyle
                   ]}
                 >
                   {children}
                 </HighlightView>
 
                 <View
+                  accessible={false}
+                  accessibilityLabel="vie_tooltip_label"
                   onLayout={this.handleTooltipLayout}
                   style={[styles.tooltipContainer, {
                     top: tooltipTop,
@@ -404,6 +416,8 @@ export default class Tips extends PureComponent {
                   }, tooltipContainerStyle]}
                 >
                   <Tooltip
+                    accessible={false}
+                    accessibilityLabel="tooltip_label"
                     style={style}
                   >
                     {content}
